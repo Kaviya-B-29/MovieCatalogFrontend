@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+body {
+  font-family: system-ui, sans-serif;
+  background-color: white;
+  color: #111827; /* Tailwind gray-900 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
