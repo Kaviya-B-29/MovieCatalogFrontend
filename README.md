@@ -1,45 +1,37 @@
-# Movie Search App
+# 🎬 Movie Catalog Frontend
 
-This is a movie search application built using ReactJS, React Router, and Tailwind CSS. It allows users to search for movies using the OMDB API, view details, filter by type, paginate results, and manage a list of favorites.
+A responsive movie and series discovery application built with **React** and **Vite**, allowing users to search movies/series, view details, manage favorites, and maintain a watchlist.
 
-## Features
+This frontend consumes a custom backend API which proxies data from the OMDb API and handles watchlist persistence.
 
-- Search movies by title or keyword
-- View detailed information for each movie
-- Filter by type (movie, series, episode)
-- Pagination support (10 movies per page)
-- Add or remove movies from favorites
-- View favorite movies list
-- Responsive UI with Tailwind CSS
-- Error handling and empty state messages
+---
 
-## Project Structure
-movie-search-app/
--- public/
--- src/
-    -- components/
-        -FavoritePage       // Displays all the favorite movies which persist across sessions
-        -Moviecard          // Renders each movie poster, title, and type
-        -Navbar             // Top navigation with link to favorites
-        -Pagination         // Controls for navigating between result pages each 
-        -SearchBar          // Input + dropdown to search movies by title/type
-    ── context/
-        -FavoriteContext    // React Context to store favorite movies across routes
-    ── pages/
-        -HomePage           // Movie search and results page
-        -MovieDetails       // Single movie detail page
-    ── services/
-        -api                // Handles OMDB API requests
-    ── App.jsx              // Main app component and routing setup
-    ── main.jsx             // Entry point used by Vite
-    ── index.css
+## 🚀 Features
 
+- Search movies and TV series by title
+- View detailed movie information
+- Pagination support for search results
+- Add / remove movies from **Favorites** (local state)
+- Add movies to **Watchlist** (backend-persisted)
+- Dedicated Watchlist page
+- Responsive UI using Tailwind CSS
+- Client-side routing with React Router
 
-## Tech Stack
+---
 
-- ReactJS
+## 🛠 Tech Stack
+
+- React (Vite)
+- JavaScript (ES6+)
 - React Router v6
+- Axios
 - Tailwind CSS
-- JavaScript
-- OMDB API
+
+---
+
+## 📦 Project Setup
+
+### 1️⃣ Install dependencies
+```bash
+npm install
 
