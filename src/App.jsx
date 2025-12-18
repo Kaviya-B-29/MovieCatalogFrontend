@@ -59,10 +59,12 @@ const router = createBrowserRouter(routes, {
 const App = () => {
   return (
     <FavoritesProvider>
+
       <RouterProvider
         router={router}
         future={{ v7_startTransition: true }}
       />
+
     </FavoritesProvider>
   );
 };

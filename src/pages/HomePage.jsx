@@ -50,9 +50,10 @@ const HomePage = () => {
       {error && <p className="text-red-500 text-center">{error}</p>}
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 mt-4 bg-gradient-to-tr from-blue-200 to-white">
-        {movies.map((movie) => (
-          <MovieCard key={movie.imdbID} movie={movie} />
-        ))}
+       {movies.map((movie, index) => (
+  <MovieCard key={`${movie.imdbID}-${index}`} movie={movie} />
+))}
+
       </div>
 
       {totalPages > 1 && (

@@ -16,8 +16,12 @@ const Watchlist = () => {
     loadWatchlist();
   }, []);
 
-  const handleRemove = async (id) => {
-    await removeFromWatchlist(id);
+  const handleRemove = async (movie) => {
+    await removeFromWatchlist(movie._id);
+
+    // 🔴 IMPORTANT: sync localStorage with backend
+    localStorage.removeItem(`watchlist-${movie.imdbID}`);
+
     loadWatchlist();
   };
 
@@ -41,7 +45,7 @@ const Watchlist = () => {
           <p className="text-sm text-gray-600">{movie.year}</p>
 
           <button
-            onClick={() => handleRemove(movie._id)}
+            onClick={() => handleRemove(movie)}
             className="mt-2 w-full bg-red-600 text-white py-1 rounded"
           >
             Remove
