@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useFavorites } from "../context/FavoriteContext";
 import {
@@ -10,7 +10,10 @@ const MovieCard = ({ movie }) => {
   const { isFavorite, toggleFavorite } = useFavorites();
   const [addedToWatchlist, setAddedToWatchlist] = useState(false);
 
-  // ✅ On mount, verify with BACKEND (not localStorage)
+  // 🔑 prevents backend check from overriding user action
+  const userClickedAddRef = useRef(false);
+
+  // ✅ On mount, verify with BACKEND
   useEffect(() => {
     const checkWatchlist = async () => {
       try {
@@ -18,9 +21,13 @@ const MovieCard = ({ movie }) => {
         const exists = res.data.some(
           (item) => item.imdbID === movie.imdbID
         );
-        setAddedToWatchlist(exists);
+
+        // ✅ only update if user has NOT clicked Add
+        if (!userClickedAddRef.current) {
+          setAddedToWatchlist(exists);
+        }
       } catch {
-        setAddedToWatchlist(false);
+        // keep current state
       }
     };
 
@@ -35,6 +42,8 @@ const MovieCard = ({ movie }) => {
         poster: movie.Poster,
         year: movie.Year,
       });
+
+      userClickedAddRef.current = true; // 🔒 lock state
       setAddedToWatchlist(true);
     } catch {
       alert("Already in Watchlist");
