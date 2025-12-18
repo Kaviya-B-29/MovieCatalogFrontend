@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
 import { useFavorites } from "../context/FavoriteContext";
 import { addToWatchlist } from "../services/watchlistService";
+import { useState } from "react";
+const [addedToWatchlist, setAddedToWatchlist] = useState(false);
 
 const MovieCard = ({ movie }) => {
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const handleAddToWatchlist = async () => {
-    try {
-      await addToWatchlist({
-        imdbID: movie.imdbID,
-        title: movie.Title,
-        poster: movie.Poster,
-        year: movie.Year,
-      });
-      alert("Added to Watchlist");
-    } catch (err) {
-      alert("Failed to add to Watchlist");
-    }
-  };
+  try {
+    await addToWatchlist({
+      imdbID: movie.imdbID,
+      title: movie.Title,
+      poster: movie.Poster,
+      year: movie.Year,
+    });
+    setAddedToWatchlist(true);
+  } catch (err) {
+    alert("Already in watchlist");
+  }
+};
+
 
   return (
     <div className="bg-white shadow rounded-lg p-4 flex flex-col">
@@ -53,11 +56,17 @@ const MovieCard = ({ movie }) => {
 
       {/* Watchlist */}
       <button
-        onClick={handleAddToWatchlist}
-        className="mt-3 bg-indigo-600 text-white py-1 rounded hover:bg-indigo-700"
-      >
-        Add to Watchlist
-      </button>
+  onClick={handleAddToWatchlist}
+  disabled={addedToWatchlist}
+  className={`mt-3 py-1 rounded text-white ${
+    addedToWatchlist
+      ? "bg-gray-400 cursor-not-allowed"
+      : "bg-indigo-600 hover:bg-indigo-700"
+  }`}
+>
+  {addedToWatchlist ? "Added to Watchlist" : "Add to Watchlist"}
+</button>
+
     </div>
   );
 };
